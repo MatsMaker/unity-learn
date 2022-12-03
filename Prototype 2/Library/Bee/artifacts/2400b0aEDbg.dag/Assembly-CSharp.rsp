@@ -357,6 +357,7 @@
 "Assets/Scripts/DetectCollisions.cs"
 "Assets/Scripts/MoveForward.cs"
 "Assets/Scripts/PlayerController.cs"
+"Assets/Scripts/Settings/PlayAreaLimits.cs"
 "Assets/Scripts/SpawnManager.cs"
 -langversion:9.0
 

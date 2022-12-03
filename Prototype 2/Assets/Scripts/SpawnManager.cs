@@ -5,17 +5,45 @@ using UnityEngine;
 public class SpawnManager : MonoBehaviour
 {
 
-    public GameObject[] animalPrefaps;
-    protected float spawnRangeX = 10;
-    protected float spawnPosZ = 29;
-
+    public GameObject[] animalPrefabs;
+    protected Vector3[] spawnTypes = {Vector3.left, Vector3.forward, Vector3.right};
     private float startDelay = 2;
     private float spawnInterval = 1.5f;
     void SpawnRandomAnimal()
     {
-        int animalIndex = Random.Range(0, animalPrefaps.Length);
-        Vector3 spawnpos = new Vector3(Random.Range(-spawnRangeX, spawnRangeX), 0, spawnPosZ);
-        Instantiate(animalPrefaps[animalIndex], spawnpos, animalPrefaps[animalIndex].transform.rotation);
+        Vector3 spawnType = spawnTypes[Random.Range(0, spawnTypes.Length)];
+        Vector3 spawnPos = SpawnPosition(spawnType);
+        int animalIndex = Random.Range(0, animalPrefabs.Length);
+        Quaternion rotation = SpawnRotation(animalPrefabs[animalIndex], spawnType);
+        Instantiate(animalPrefabs[animalIndex], spawnPos, rotation);
+    }
+
+    Quaternion SpawnRotation(GameObject prefab, Vector3 direction)
+    {
+        if (direction == Vector3.left)
+        {
+            return Quaternion.Euler(Vector3.up * 90);
+        }
+        if (direction == Vector3.right)
+        {
+            return Quaternion.Euler(Vector3.up * -90);
+        }
+        // is equal Vector3.froward
+        return Quaternion.Euler(Vector3.up * 180);
+    }
+
+    Vector3 SpawnPosition(Vector3 direction)
+    {
+        if (direction == Vector3.left)
+        {
+            return new Vector3(PlayAreaLimits.left, 0, Random.Range(PlayAreaLimits.back, PlayAreaLimits.forward));
+        }
+        if (direction == Vector3.right)
+        {
+            return new Vector3(PlayAreaLimits.right, 0, Random.Range(PlayAreaLimits.back, PlayAreaLimits.forward));
+        }
+        // is equal Vector3.froward
+        return new Vector3(Random.Range(PlayAreaLimits.left, PlayAreaLimits.right), 0, PlayAreaLimits.forward);
     }
     // Start is called before the first frame update
     void Start()
