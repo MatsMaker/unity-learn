@@ -36,11 +36,11 @@ public class SpawnManager : MonoBehaviour
     {
         if (direction == Vector3.left)
         {
-            return new Vector3(PlayAreaLimits.left, 0, Random.Range(PlayAreaLimits.back, PlayAreaLimits.forward));
+            return new Vector3(PlayAreaLimits.left, 0, Random.Range(PlayAreaLimits.back / 2, PlayAreaLimits.forward));
         }
         if (direction == Vector3.right)
         {
-            return new Vector3(PlayAreaLimits.right, 0, Random.Range(PlayAreaLimits.back, PlayAreaLimits.forward));
+            return new Vector3(PlayAreaLimits.right, 0, Random.Range(PlayAreaLimits.back / 2, PlayAreaLimits.forward));
         }
         // is equal Vector3.froward
         return new Vector3(Random.Range(PlayAreaLimits.left, PlayAreaLimits.right), 0, PlayAreaLimits.forward);

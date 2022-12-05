@@ -24,10 +24,5 @@ public class DestroyOutOfBounds : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        // else if (transform.position.z < backBound)
-        // {
-        //     // Debug.Log("Game Over!");
-        //     Destroy(gameObject);
-        // }
     }
 }

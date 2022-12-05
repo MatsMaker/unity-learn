@@ -46,7 +46,12 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space)) 
         {
-            Instantiate(projectilePrefab, transform.position, projectilePrefab.transform.rotation);
+            Instantiate(projectilePrefab, new Vector3(transform.position.x, transform.position.y, transform.position.z + 0.5f), projectilePrefab.transform.rotation);
         }
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        Debug.Log("Game Over!");
     }
 }
