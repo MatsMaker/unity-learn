@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class DestroyOutOfBounds : MonoBehaviour
 {
+    private GameController gameController;
     private float forwardBound = PlayAreaLimits.forward + 1;
     private float backBound = PlayAreaLimits.back - 1;
     private float rightBound = PlayAreaLimits.right + 1;
@@ -11,7 +12,8 @@ public class DestroyOutOfBounds : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        GameObject gameControllerObj = GameObject.Find("GameController");
+        gameController = gameControllerObj.GetComponent(typeof(GameController)) as GameController;
     }
 
     // Update is called once per frame
@@ -22,6 +24,10 @@ public class DestroyOutOfBounds : MonoBehaviour
         || transform.position.x > rightBound
         || transform.position.x < leftBound)
         {
+            if (gameObject.tag == "Animal") {
+                Debug.Log("Animal is out");
+                gameController.playerHit();
+            }
             Destroy(gameObject);
         }
     }

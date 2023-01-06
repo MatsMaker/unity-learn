@@ -4,16 +4,28 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    public int Lives = 3;
+    public int Score = 0;
     public GameObject projectilePrefab;
     public float horizontalInput;
     public float forwardInput;
-    public float speed = 10.0f;
-    public float xRange = 10f;
-    public float zRange = 10f;
+    public float speed = 15f;
+    private float xRange = 20f;
+    private float zRange = 10f;
     // Start is called before the first frame update
     void Start()
     {
+        ShowState();
+    }
 
+    bool IsLive()
+    {
+        return Lives > 0;
+    }
+
+    void ShowState()
+    {
+        Debug.Log("Lives: " + Lives + " Score: " + Score);
     }
 
     // Update is called once per frame
@@ -50,8 +62,24 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void hit()
+    {
+        Lives--;
+        ShowState();
+        ifDied();
+    }
+
+    protected void ifDied()
+    {
+        if (!IsLive())
+        {
+            Debug.Log("=== Game Over! ===" + "Score: " + Score);
+            Destroy(gameObject);
+        }
+    } 
+
     void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Game Over!");
+        hit();
     }
 }
